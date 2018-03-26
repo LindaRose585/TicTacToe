@@ -1,24 +1,37 @@
 # TicTacToe
+
 #include <iostream>
+	
 #include <string>
+	
 using namespace std;
 
 // Global Constants for the rows and columns
+
 const int ROWS = 3;
+
 const int COLS = 3;
 
 // Function prototypes
+
 void displayBoard(string [][COLS]);
+
 void playerTurn(string [][COLS], string);
+
 bool gameOver(string [][COLS]);
+
 bool playerWins(string [][COLS], string);
+
 bool playerCanWin(string [][COLS], string);
+
 void displayWinner(string [][COLS]);
 
 int main()
 {
 	// Array for the game board.
+	
 	string gameBoard[ROWS][COLS] = {{"*","*","*"},{"*","*","*"},{"*","*","*"}};
+	
 	// Enter the game loop.
 
 	do
@@ -50,10 +63,14 @@ int main()
 }
 
 // The displayBoard function displays the contents of
-// the board.                                          
+
+// the board.                                   
+
 void displayBoard(string board[][COLS])
+
 {
 	// Display the column headings.
+	
 	cout << "-------------------------------------\n";
 	cout << "\t| Tic-Tac-Toe Game |\n";
 	cout << "-------------------------------------\n";
@@ -77,13 +94,17 @@ void displayBoard(string board[][COLS])
 }
 
 // The playerTurn function allows a player (X or O) to 
+
 // take a turn.
+
 void playerTurn(string board[][COLS], string symbol)
+
 {
 	// The isAvailable flag is set to true when the
 	// player selects a location on the board that
 	// is available. (initialized to false until set to true 
 	// when player selects a location on the board that is available)
+	
 	bool isAvailable = false;
 
    
@@ -91,19 +112,24 @@ void playerTurn(string board[][COLS], string symbol)
 	int col;  // column to place symbol
    
 	// Prompt the player to enter a location.
+	
 	cout << "Player " << symbol << "'s turn.\n";
 	cout << "Enter a row and column to place an "
 	     << symbol << ".\n";
 	cout << "-------------------------------------\n\n";
    
 	// Get and validate the location.
+	
 	while (!isAvailable)
+	
 	{
 		// Get the row.
+		
 		cout << "Row   : ";
 		cin >> row;
       
 		// Validate the row.
+		
 		while (row < 1 || row > ROWS)
 		{
 			cout << "\n-------------------------------------\n";
@@ -118,6 +144,7 @@ void playerTurn(string board[][COLS], string symbol)
 		cin >> col;
    
 		// Validate the column.
+		
 		while (col < 1 || col > COLS)
 		{
 
@@ -125,6 +152,7 @@ void playerTurn(string board[][COLS], string symbol)
       
 		// Determine whether the selected
 		// cell is available.
+		
 		if (board[row - 1][col - 1] == "*")
 			isAvailable = true;
 		else
@@ -139,38 +167,52 @@ void playerTurn(string board[][COLS], string symbol)
    
 	// Place the player's symbol on the board
 	// at the selected location.
+	
 	board[row - 1][col - 1] = symbol;
 }
 
 // The gameOver function returns true if the game
 // is over. This is the case when either player has
 // already won, or there is a tie.
-bool gameOver(string board[][COLS])
-{
-	bool status;	// Boolean flag
 
+bool gameOver(string board[][COLS])
+
+{
+	// Boolean flag
+	
+	bool status;	
+	
 	// If either player has already won, game over.
+	
 	if (playerWins(board, "X") || playerWins(board, "O"))
 		status = true; 
       
 	// Else If either player CAN STILL win, the game is not over, yet.
+	
 	else if (playerCanWin(board, "X") || playerCanWin(board, "O"))
 		status = false;
    
 	// else, Otherwise, it's a tie. Game over.
+	
 	else 
 		status = true;
 	
 	// Return the status.
+	
 	return status;
 }
 
 // The playerWins function accepts the game board and
 // a player symbol (X or O) as arguments. It returns
 // true if the player has won.
+
+
 bool playerWins(string board[][COLS], string symbol)
+
 {
-	bool status = false;	// Boolean flag, set to false
+	// Boolean flag, set to false
+	
+	bool status = false;	
 
 	// Check the first horizontal row.
 	if (board[0][0] == symbol && board[0][1] == symbol &&
@@ -214,9 +256,12 @@ bool playerWins(string board[][COLS], string symbol)
 
 // The playerCanWin function returns true if the
 // player (X or O) can still win.
+
 bool playerCanWin(string board[][COLS], string symbol)
 {
-	bool status = false;	// Boolean flag, set to false
+	// Boolean flag, set to false
+	
+	bool status = false;	
 
 	// Check the first horizontal row for a possibility.
 	if ((board[0][0] == symbol || board[0][0] == "*") && 
@@ -265,6 +310,7 @@ bool playerCanWin(string board[][COLS], string symbol)
 }
 
 // The displayWinner function displays the winner.
+
 void displayWinner(string board[][COLS])
 {
 	if (playerWins(board, "X"))
